@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>MODAL</title>
+
+        <!-- Modal Styles -->
+        <style>
+        .text-center{
+        text-align: center;
+        }
+        .custom-modal{
+        z-index:3;
+        display:block;
+        padding-top:100px;
+        position:fixed;
+        left:0;
+        top:0;
+        width:100%;
+        height:100%;
+        overflow:auto;
+        background-color:rgb(0,0,0);
+        background-color:rgba(0,0,0,0.4)
+        }
+        .custom-modal-content{
+        margin:auto;
+        background-color:#fff;
+        position:relative;
+        padding:0;
+        outline:0;
+        width:600px;
+        }
+        .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        }
+        .custom-animate-top{
+        position:relative;
+        animation:animatetop 0.8s
+        }
+            @keyframes animatetop{
+                from{
+                top:-400px;
+                opacity:0}
+                to{
+                top:0;opacity:1
+                }
+            }
+        .custom-display-topright{
+        position:absolute;
+        right:0;
+        top:0;
+        }
+        @media (max-width:600px){
+            .custom-modal-content{
+            margin:0 10px;
+            width:auto!important;
+            }
+            .custom-modal{
+            padding-top:30px;
+            }
+        }
+        @media (max-width:768px){
+            .custom-modal-content{
+            width:500px;
+            }
+            .custom-modal{
+            padding-top:50px;
+            }
+        }
+        @media (min-width:993px){
+            .custom-modal-content{
+            width:900px;
+            }    
+        }
+        </style>
+        <!-- Modal Styles -->        
+    </head>
+
+    <body>
+        <!-- Modal Script -->
+        <script>
+            function modalOpen(e) {
+                window.modal_id=e;
+                var modalDiv = document.createElement('div');
+                modalDiv.classList.add("custom-modal");
+                modalDiv.id = e;
+                var modal = '<div class="custom-modal-content custom-animate-top"><div class="modal-header"><span onclick="removeModal(\''+e+'\')" class="btn custom-display-topright">&times;</span><h5 class="modal-title">EDIT</h5></div><div class="modal-body text-center"><h1>Hello!!!!</h1><hr><small class="text-muted">I am a modal.</small><div id="modalSpace"></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="removeModal(\''+e+'\')">Close</button></div></div>';
+                modalDiv.innerHTML = modal;
+                document.body.appendChild(modalDiv);                
+            }
+
+            document.onkeydown = function keyremove(evt) {
+                evt = evt || window.event;
+                if (evt.keyCode == 27 & window.modal_id!==0) {removeModal(window.modal_id);}
+            };
+
+            function removeModal(id) {
+                window.modal_id=0;
+                var elem = document.getElementById(id);
+                return elem.parentNode.removeChild(elem);
+            }
+        </script>
+        <!-- Modal Script -->
+
+        <button class="btn" onclick='modalOpen("modal_id")'>OPEN MODAL</button>
+    </body>
+</html>
